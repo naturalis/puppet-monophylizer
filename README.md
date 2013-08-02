@@ -38,6 +38,7 @@ Puppet code
 class { monophylizer: }
 ```
 Result
+-------------
 The resulting website can be found under the last part of the 'docroot' parameter, in this example http://yourserver/monophylizer
 
 Demo data is available at: https://github.com/naturalis/monophylizer/tree/master/data
