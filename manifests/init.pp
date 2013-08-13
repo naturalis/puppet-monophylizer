@@ -3,20 +3,32 @@
 # This class installs the monophylizer webtool, for more information https://github.com/ncbnaturalis/monophylizer
 #
 # === Parameters
+# Hiera yaml
+# monophylizer:
+#  monophylizer.cloud.naturalis.nl:
+#    serveraliases: '*.cloud.naturalis.nl'
+#    docroot: /var/www/monophylizer
+#    port: 80
+#    ssl: no
+#    serveradmin: bestaatniet@naturalis.nl
+#    options: +FollowSymLinks +ExecCGI
 #
 # === Variables
 #
 # === Examples
 #
-#  class { monophylizer: }
+# class { monophylizer: }
+# The resulting website can be found under the last part of the 'docroot' parameter, in this example http://yourserver/monophylizer
+# Demo data is available at: https://github.com/naturalis/monophylizer/tree/master/data
 #
 # === Authors
 #
-# Author Name <author@domain.com>
+# Author Name <p.gomersbach@gmail.com>
 #
 # === Copyright
 #
-# Copyright 2013 Your name here, unless otherwise noted.
+# Copyright 2013 Naturalis.
+#
 #
 class monophylizer {
   include concat::setup

@@ -42,6 +42,10 @@ Result
 The resulting website can be found under the last part of the 'docroot' parameter, in this example http://yourserver/monophylizer
 
 Demo data is available at: https://github.com/naturalis/monophylizer/tree/master/data
+
+Example deployment using puppet apply and openstack
+-------------
+https://github.com/naturalis/puppet/blob/master/private/scripts/cloud-puppet.sh
 Limitations
 -------------
 This module has been built on and tested against Puppet 2.7 and higher.
