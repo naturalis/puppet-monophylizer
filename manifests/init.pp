@@ -3,7 +3,7 @@
 # This class installs the monophylizer webtool, for more information https://github.com/ncbnaturalis/monophylizer
 #
 # === Parameters
-#Hiera yaml
+# Hiera yaml
 # monophylizer:
 #  monophylizer.cloud.naturalis.nl:
 #    serveraliases: '*.cloud.naturalis.nl'
