@@ -30,7 +30,23 @@
 # Copyright 2013 Naturalis.
 #
 #
-class monophylizer {
+class monophylizer (
+  $instances           = {'monophylizer.cloud.naturalis.nl' => { 
+                           'serveraliases'   => '*.cloud.naturalis.nl',
+                           'docroot'         => '/var/www/monophylizer',
+                           'port'            => 80,
+                           'scriptalias      => '/usr/lib/cgi-bin',
+                           'serveradmin'     => 'webmaster@monophylizer.naturalis.nl',
+                           'priority'        => 20,
+                           'options'         => '+FollowSymLinks +ExecCGI',
+                          },
+			},
+  $reposource         = 'https://github.com/naturalis/monophylizer.git',
+  $appdir             = '/var/monopylizer',
+  $webdir             = '/var/www/monophylizer',
+  $libdir             = '/usr/lib/cgi-bin',
+
+){
   include concat::setup
   include apache
 
@@ -46,39 +62,41 @@ class monophylizer {
     require  => Package['perl-doc'],
   }
 
-  class { 'monophylizer::instances': }
+  class { 'monophylizer::instances': 
+    instances => $instances,
+  }
 
-  vcsrepo { '/var/monophylizer':
+  vcsrepo { $appdir:
     ensure   => latest,
     provider => git,
-    source   => 'https://github.com/ncbnaturalis/monophylizer.git',
+    source   => $reposource,
     require  => Class['monophylizer::instances'],
   }
 
-  file { '/var/monophylizer/script/monophylizer.pl':
+  file { "${appdir}/script/monophylizer.pl":
     ensure  => 'file',
     mode    => '0755',
-    require => Vcsrepo['/var/monophylizer'],
+    require => Vcsrepo[$appdir],
   }
 
-  file { '/usr/lib/cgi-bin/monophylizer.pl':
+  file { "${libdir}/monophylizer.pl":
     ensure  => 'link',
     mode    => '0777',
-    target  => '/var/monophylizer/script/monophylizer.pl',
-    require => Vcsrepo['/var/monophylizer'],
+    target  => "${appdir}/script/monophylizer.pl",
+    require => Vcsrepo[$appdir],
   }
 
-  file { '/var/www/monophylizer/index.html':
+  file { "${webdir}/index.html":
     ensure  => 'link',
     mode    => '0644',
-    target  => '/var/monophylizer/html/monophylizer.html',
-    require => Vcsrepo['/var/monophylizer'],
+    target  => "${appdir}/html/monophylizer.html",
+    require => Vcsrepo[$appdir],
   }
 
-  file { '/var/www/monophylizer/sorttable.js':
+  file { "${webdir}/sorttable.js":
     ensure  => 'link',
     mode    => '0644',
-    target  => '/var/monophylizer/script/sorttable.js',
-    require => Vcsrepo['/var/monophylizer'],
+    target  => "${appdir}/script/sorttable.js",
+    require => Vcsrepo[$appdir],
   }
 }

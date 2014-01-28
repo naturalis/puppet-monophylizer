@@ -6,7 +6,9 @@
 # class { 'monophylizer::instances': }
 #
 #
-class monophylizer::instances
+class monophylizer::instances (
+  $instances,
+)
 {
-  create_resources('apache::vhost', hiera('monophylizer', []))
+  create_resources('apache::vhost', $instances)
 }
