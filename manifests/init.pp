@@ -35,7 +35,7 @@ class monophylizer (
                            'serveraliases'   => '*.cloud.naturalis.nl',
                            'docroot'         => '/var/www/monophylizer',
                            'port'            => 80,
-                           'scriptalias      => '/usr/lib/cgi-bin',
+                           'scriptalias'     => '/usr/lib/cgi-bin',
                            'serveradmin'     => 'webmaster@monophylizer.naturalis.nl',
                            'priority'        => 20,
                            'options'         => '+FollowSymLinks +ExecCGI',
