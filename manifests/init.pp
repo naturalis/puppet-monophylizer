@@ -70,14 +70,15 @@ class monophylizer (
     ensure   => latest,
     provider => git,
     source   => $reposource,
+    revision => 'master',
     require  => Class['monophylizer::instances'],
   }
 
-  file { "${appdir}/script/monophylizer.pl":
-    ensure  => 'file',
-    mode    => '0755',
-    require => Vcsrepo[$appdir],
-  }
+#  file { "${appdir}/script/monophylizer.pl":
+#    ensure  => 'file',
+#    mode    => '0755',
+#    require => Vcsrepo[$appdir],
+#  }
 
   file { "${libdir}/monophylizer.pl":
     ensure  => 'link',
