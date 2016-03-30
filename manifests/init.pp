@@ -27,7 +27,7 @@
 #
 # === Copyright
 #
-# Copyright 2013 Naturalis.
+# Copyright 2013-2016 Naturalis.
 #
 #
 class monophylizer (
@@ -51,6 +51,10 @@ class monophylizer (
   include apache
 
   package { 'perl-doc':
+    ensure => present,
+  }
+  
+  package { 'libxml-twig-perl':
     ensure => present,
   }
 
