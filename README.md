@@ -51,6 +51,8 @@ Example deployment using puppet apply locally, e.g. in a fresh VM
 -----------------------------------------------------------------
 
 Here are the steps that would have to be taken:
+- `sudo rm -rf /var/lib/apt/lists/*`
+- `sudo apt-get update`
 - `sudo apt-get install git`
 - `sudo apt-get install puppet`
 - `sudo mv /etc/puppet /etc/puppet.orig`
