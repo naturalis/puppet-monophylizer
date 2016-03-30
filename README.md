@@ -46,6 +46,18 @@ Demo data is available at: https://github.com/naturalis/monophylizer/tree/master
 Example deployment using puppet apply and openstack
 -------------
 https://github.com/naturalis/puppet/blob/master/private/scripts/cloud-puppet.sh
+
+Example deployment using puppet apply locally, e.g. in a fresh VM
+-----------------------------------------------------------------
+
+Here are the steps that would have to be taken:
+1. `sudo apt-get install git`
+2. `sudo apt-get install puppet`
+3. `mv /etc/puppet /etc/puppet.orig` # i.e., backup
+4. `sudo git clone https://github.com/naturalis/puppet.git /etc/puppet` # i.e. add our institutional modules
+5. `sudo git clone https://github.com/naturalis/puppet-monophylizer.git /etc/puppet/modules/monophylizer` # i.e. add monophylizer
+6. `sudo puppet apply /etc/puppet/manifests/monophylizer.pp` # apply our manifest
+
 Limitations
 -------------
 This module has been built on and tested against Puppet 2.7 and higher.
@@ -58,4 +70,3 @@ Authors
 - [pgomersbach](https://github.com/pgomersbach)
 - [hduijn](https://github.com/hduijn)
 - [rvosa](https://github.com/rvosa)
-
