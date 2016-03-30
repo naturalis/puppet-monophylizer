@@ -53,10 +53,10 @@ Example deployment using puppet apply locally, e.g. in a fresh VM
 Here are the steps that would have to be taken:
 - `sudo apt-get install git`
 - `sudo apt-get install puppet`
-- `mv /etc/puppet /etc/puppet.orig` # i.e., backup
-- `sudo git clone https://github.com/naturalis/puppet.git /etc/puppet` # i.e. add our institutional modules
-- `sudo git clone https://github.com/naturalis/puppet-monophylizer.git /etc/puppet/modules/monophylizer` # i.e. add monophylizer
-- `sudo puppet apply /etc/puppet/manifests/monophylizer.pp` # apply our manifest
+- `mv /etc/puppet /etc/puppet.orig`
+- `sudo git clone https://github.com/naturalis/puppet.git /etc/puppet`
+- `sudo git clone https://github.com/naturalis/puppet-monophylizer.git /etc/puppet/modules/monophylizer`
+- `sudo puppet apply /etc/puppet/manifests/monophylizer.pp`
 
 Limitations
 -------------
