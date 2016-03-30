@@ -50,18 +50,24 @@ class monophylizer (
   include concat::setup
   include apache
 
+  # installs the command line tool to read perldoc-formatted manual pages
+  # using whatever is the package manager (probably apt-get)
   package { 'perl-doc':
     ensure => present,
   }
   
+  # installs the XML::Twig perl library for parsing XML documents, needed
+  # for monophylizing NeXML and phyloXML documents.
   package { 'libxml-twig-perl':
     ensure => present,
   }
 
+  # sets up perl tools, e.g. cpanminus
   class { 'perl':
     require  => Package['perl-doc'],
   }
 
+  # installs the Bio::Phylo perl library using cpanminus
   perl::module { 'Bio::Phylo':
     require  => Package['perl-doc'],
   }
@@ -70,6 +76,7 @@ class monophylizer (
     instances => $instances,
   }
 
+  # clones the monophylizer repository into /var
   vcsrepo { $appdir:
     ensure   => latest,
     provider => git,
@@ -78,12 +85,14 @@ class monophylizer (
     require  => Class['monophylizer::instances'],
   }
 
+  # sets monophylizer.pl script to executable
   file { "${appdir}/script/monophylizer.pl":
     ensure  => 'file',
     mode    => '0755',
     require => Vcsrepo[$appdir],
   }
 
+  # creates executable link from cgi-bin to monophylizer.pl script
   file { "${libdir}/monophylizer.pl":
     ensure  => 'link',
     mode    => '0777',
@@ -91,17 +100,25 @@ class monophylizer (
     require => Vcsrepo[$appdir],
   }
 
-  file { "${webdir}/index.html":
-    ensure  => 'link',
+  file { $webdir:
+    ensure  => 'directory',
     mode    => '0644',
-    target  => "${appdir}/html/monophylizer.html",
+    source  => "${appdir}/html",
     require => Vcsrepo[$appdir],
+    recurse => true,
   }
+
+#  file { "${webdir}/index.html":
+#    ensure  => 'link',
+#    mode    => '0644',
+#    target  => "${appdir}/html/monophylizer.html",
+#    require => Vcsrepo[$appdir],
+#  }
 
   file { "${webdir}/sorttable.js":
     ensure  => 'link',
     mode    => '0644',
     target  => "${appdir}/script/sorttable.js",
-    require => Vcsrepo[$appdir],
+    require => File[$webdir],
   }
 }
