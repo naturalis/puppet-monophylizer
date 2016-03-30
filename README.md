@@ -50,7 +50,13 @@ https://github.com/naturalis/puppet/blob/master/private/scripts/cloud-puppet.sh
 Example deployment using puppet apply locally, e.g. in a fresh VM
 -----------------------------------------------------------------
 
-Here are the steps that would have to be taken:
+Below are the steps that would have to be taken. The basic idea is to first bootstrap the VM
+to the point where it can clone repositories and apply puppet manifests. Then we install the
+additional puppet modules that the ICT dept. have developed, and subsequently the modules
+specifically for the monophylizer. If you are simply setting up a VM in order to develop
+these modules further you will probably want to take a snapshot right before the last step
+so that you can (re-)run the install from a clean snapshot. This works on a clean Ubuntu 12.04.
+
 - `sudo rm -rf /var/lib/apt/lists/*` # [reason](http://askubuntu.com/questions/41605/trouble-downloading-packages-list-due-to-a-hash-sum-mismatch-error)
 - `sudo apt-get update`
 - `sudo apt-get install git`
