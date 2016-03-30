@@ -1,5 +1,5 @@
 name    'naturalis-monophylizer'
-version '0.0.1'
+version '0.0.2'
 author 'pgomersbach'
 license 'Apache License, Version 2.0'
 summary 'Puppet module to install the monophylizer webtool'
