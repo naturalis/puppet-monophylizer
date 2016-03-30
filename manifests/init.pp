@@ -100,19 +100,18 @@ class monophylizer (
     require => Vcsrepo[$appdir],
   }
 
-  file { $webdir:
-    ensure  => 'link',
-    mode    => '0644',
-    target  => "${appdir}/html",
-    require => Vcsrepo[$appdir],
-  }
-
 #  file { "${webdir}/index.html":
 #    ensure  => 'link',
 #    mode    => '0644',
-#    target  => "${appdir}/html/monophylizer.html",
+#    target  => "${appdir}/html/index.html",
 #    require => Vcsrepo[$appdir],
 #  }
+
+  exec { "static_files":
+    command => "cp -r ${appdir}/html/* ${webdir}/",
+    creates => "${appdir}/monophylizer.html",
+    require => Vcsrepo[$appdir],
+  }
 
   file { "${webdir}/sorttable.js":
     ensure  => 'link',
