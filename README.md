@@ -55,5 +55,7 @@ Ubuntu 12.04
 
 Authors
 -------------
-Author Name <p.gomersbach@gmail.com>
+- [pgomersbach](https://github.com/pgomersbach)
+- [hduijn](https://github.com/hduijn)
+- [rvosa](https://github.com/rvosa)
 
