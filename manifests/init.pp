@@ -101,11 +101,10 @@ class monophylizer (
   }
 
   file { $webdir:
-    ensure  => 'directory',
+    ensure  => 'link',
     mode    => '0644',
-    source  => "${appdir}/html",
+    target  => "${appdir}/html",
     require => Vcsrepo[$appdir],
-    recurse => true,
   }
 
 #  file { "${webdir}/index.html":
@@ -119,6 +118,6 @@ class monophylizer (
     ensure  => 'link',
     mode    => '0644',
     target  => "${appdir}/script/sorttable.js",
-    require => File[$webdir],
+    require => Vcsrepo[$appdir],
   }
 }
