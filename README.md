@@ -51,7 +51,7 @@ Example deployment using puppet apply locally, e.g. in a fresh VM
 -----------------------------------------------------------------
 
 Here are the steps that would have to be taken:
-- `sudo rm -rf /var/lib/apt/lists/*`
+- `sudo rm -rf /var/lib/apt/lists/*` # [reason](http://askubuntu.com/questions/41605/trouble-downloading-packages-list-due-to-a-hash-sum-mismatch-error)
 - `sudo apt-get update`
 - `sudo apt-get install git`
 - `sudo apt-get install puppet`
