@@ -78,6 +78,7 @@ This module has been built on and tested against Puppet 2.7 and higher.
 
 The module has been tested on:
 Ubuntu 12.04
+Ubuntu 14.04
 
 Authors
 -------------
