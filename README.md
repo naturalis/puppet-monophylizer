@@ -46,6 +46,32 @@ Demo data is available at: https://github.com/naturalis/monophylizer/tree/master
 Example deployment using puppet apply and openstack
 -------------
 https://github.com/naturalis/puppet/blob/master/private/scripts/cloud-puppet.sh
+
+Example deployment using puppet apply locally, in a fresh VM (VirtualBox)
+-------------------------------------------------------------------------
+
+Below are the steps that would have to be taken in the guest OS. The basic idea is to first 
+bootstrap the VM to the point where it can clone repositories and apply puppet manifests. Then we install the
+additional puppet modules that the ICT dept. have developed, and subsequently the modules
+specifically for the monophylizer. If you are simply setting up a VM in order to develop
+these modules further you will probably want to take a snapshot right before the last step
+so that you can (re-)run the install from a clean snapshot. This works on a clean Ubuntu 12.04.
+
+- `sudo rm -rf /var/lib/apt/lists/*` # [reason](http://askubuntu.com/questions/41605/trouble-downloading-packages-list-due-to-a-hash-sum-mismatch-error)
+- `sudo apt-get update`
+- `sudo apt-get install git`
+- `sudo apt-get install puppet`
+- `sudo mv /etc/puppet /etc/puppet.orig`
+- `sudo git clone https://github.com/naturalis/puppet.git /etc/puppet`
+- `sudo git clone https://github.com/naturalis/puppet-monophylizer.git /etc/puppet/modules/monophylizer` # snapshot here
+- `sudo puppet apply /etc/puppet/manifests/monophylizer.pp`
+
+In addition to the above steps in the guest OS you will want to make sure that the webserver is 
+reachable from the host OS. In VirtualBox this is done by setting the network to "bridged"
+(Devices > Network > Network Settings...) and finding out what the IP address is of the guest
+(e.g. using `ifconfig`). You should then be able to make requests on the guest web server from
+your host's browser.
+
 Limitations
 -------------
 This module has been built on and tested against Puppet 2.7 and higher.
@@ -55,5 +81,6 @@ Ubuntu 12.04
 
 Authors
 -------------
-Author Name <p.gomersbach@gmail.com>
-
+- [pgomersbach](https://github.com/pgomersbach)
+- [hduijn](https://github.com/hduijn)
+- [rvosa](https://github.com/rvosa)
