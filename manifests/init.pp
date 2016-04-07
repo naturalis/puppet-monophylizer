@@ -39,8 +39,8 @@ class monophylizer (
                            'serveradmin'     => 'aut@naturalis.nl',
                            'priority'        => 10,
                            'options'         => '+FollowSymLinks +ExecCGI',
-                          },
-			},
+                           },
+                         },
   $reposource         = 'https://github.com/naturalis/monophylizer.git',
   $appdir             = '/var/monopylizer',
   $webdir             = '/var/www/monophylizer',
@@ -93,6 +93,7 @@ class monophylizer (
     provider   => git,
     source     => $reposource,
     revision   => 'master',
+    notify     => Exec['static_files'],
     require    => [Package['git'],Class['monophylizer::instances']],
   }
 
@@ -103,16 +104,8 @@ class monophylizer (
     require    => Vcsrepo[$appdir],
   }
 
-  # creates executable link from cgi-bin to monophylizer.pl script
-  file { "${libdir}/monophylizer.pl":
-    ensure     => 'link',
-    mode       => '0777',
-    target     => "${appdir}/script/monophylizer.pl",
-    require    => Vcsrepo[$appdir],
-  }
-
-  exec { "static_files":
-    command    => "/bin/cp -r * ${webdir}/",
+  exec { 'static_files':
+    command    => "/bin/cp -fr * ${webdir}/",
     creates    => "${webdir}/monophylizer.html",
     cwd        => "${appdir}/html/",
     require    => Vcsrepo[$appdir],
