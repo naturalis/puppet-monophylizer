@@ -106,7 +106,7 @@ class monophylizer (
 
   exec { 'static_files':
     command    => "/bin/cp -fr * ${webdir}/",
-    creates    => "${webdir}/monophylizer.html",
+    refreshonly => true,
     cwd        => "${appdir}/html/",
     require    => Vcsrepo[$appdir],
   }
